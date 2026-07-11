@@ -18,6 +18,95 @@
         <p>Diese App funktioniert jetzt auch offline!</p>
     </div>
 
+
+<!-- Der HTML Button -->
+ <h2>LocalStorage Verwaltung</h2>
+    
+    <div class="btn-group">
+        <button id="saveBtn" class="btn btn-save">Datensatz speichern</button>
+        <button id="loadBtn" class="btn btn-load">Inhalt ausgeben</button>
+        <button id="clearBtn" class="btn btn-clear">Inhalt löschen</button>
+        
+    </div>
+
+    <div class="output-container">
+        <h3>Datenbank-Inhalt:</h3>
+        <div id="outputList">Klicke auf "Inhalt ausgeben"...</div>
+    </div>
+
+    <script>
+        const saveBtn = document.getElementById('saveBtn');
+        const loadBtn = document.getElementById('loadBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const outputList = document.getElementById('outputList');
+
+        // 1. Datensatz speichern (wie zuvor)
+        saveBtn.addEventListener('click', () => {
+            const timestamp = Date.now();
+            const key = `user_${timestamp}`;
+            const data = {
+                id: timestamp,
+                name: "Max Mustermann",
+                erstelltAm: new Date().toLocaleString('de-DE')
+            };
+            localStorage.setItem(key, JSON.stringify(data));
+            alert(`Gespeichert unter: ${key}`);
+        });
+
+        // 2. Kompletten Inhalt auslesen und ausgeben
+        loadBtn.addEventListener('click', () => {
+            // Liste vorher leeren
+            outputList.innerHTML = '';
+
+            // Prüfen, ob überhaupt Daten vorhanden sind
+            if (localStorage.length === 0) {
+                outputList.innerHTML = '<span class="no-data">Die Datenbank ist leer.</span>';
+                return;
+            }
+
+            // Alle Schlüssel im LocalStorage durchlaufen
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                const rawData = localStorage.getItem(key);
+
+                // HTML-Element für diesen Eintrag erstellen
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'data-item';
+
+                // Versuchen, den String wieder in ein lesbares JSON-Objekt umzuwandeln
+                try {
+                    const parsedData = JSON.parse(rawData);
+                    // Schön formatiert anzeigen (Schlüssel + JSON-Inhalt)
+                    itemDiv.innerHTML = `<strong>${key}:</strong> ${JSON.stringify(parsedData, null, 2)}`;
+                } catch (e) {
+                    // Falls mal ein Eintrag kein JSON ist (normaler Text)
+                    itemDiv.innerHTML = `<strong>${key}:</strong> ${rawData}`;
+                }
+
+                // Element an die Liste anhängen
+                outputList.appendChild(itemDiv);
+            }
+        });
+
+
+        document.getElementById('clearBtn').addEventListener('click', () => {
+            // Löscht den gesamten LocalStorage für diese Domain
+            localStorage.clear();
+
+            // Aktualisiert die Anzeige im Ausgabefeld sofort
+            const outputList = document.getElementById('outputList');
+            if (outputList) {
+                outputList.innerHTML = '<span class="no-data">Die Datenbank wurde gelöscht.</span>';
+            }
+
+            // Bestätigung in der Konsole
+            console.log("LocalStorage komplett geleert.");
+        });
+
+    </script><!-- HTML BUTON ENDE -->
+
+
+
     <script>
         // Dynamische Ermittlung des Scopes für GitHub Pages Unterordner
         const scope = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
