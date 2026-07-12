@@ -9,6 +9,7 @@
         body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #f4f4f9; }
         .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: inline-block; }
     </style>
+      <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
     <div class="card">
@@ -24,7 +25,12 @@
         <button id="saveBtn" class="btn btn-save">Datensatz speichern</button>
         <button id="loadBtn" class="btn btn-load">Inhalt ausgeben</button>
         <button id="clearBtn" class="btn btn-clear">Inhalt löschen</button>
-        
+        <button id="createMonsterTrackerBtn" class="btn btn-addMonsterTracker">Add Monster Tracker</button>
+    </div>
+
+  <div class="monster-tracker-container">
+        <h3>Monster Tracker:</h3>
+        <div id="trackerList"></div>
     </div>
 
     <div class="output-container">

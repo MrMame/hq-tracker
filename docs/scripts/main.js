@@ -1,12 +1,21 @@
-import * as storage from './persistent/localStorage.js';
+import * as storage from './system/persistent/localStorage.js';
+import * as trackerControlFactory from './ui/trackerControlFactory.js';
 
 
 const saveBtn = document.getElementById('saveBtn');
 const loadBtn = document.getElementById('loadBtn');
 const clearBtn = document.getElementById('clearBtn');
+const createMonsterTrackerBtn = document.getElementById('createMonsterTrackerBtn');
+
 const outputList = document.getElementById('outputList');
+const trackerList = document.getElementById('trackerList');
 
 
+
+createMonsterTrackerBtn.addEventListener('click', () => {
+    const trackerControl = trackerControlFactory.createMonsterTrackerControl();
+    trackerList.appendChild(trackerControl);
+});
 
 // Save dataset
 saveBtn.addEventListener('click', () => {

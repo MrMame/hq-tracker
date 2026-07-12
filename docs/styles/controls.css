@@ -1,0 +1,58 @@
+#trackerList{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+
+
+.tracker-control{
+    height: 20em;
+    width: 20em;
+    background-color: #d42525;
+}
+
+.monster-icon{
+    width: auto;
+    height: 25%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.monster-name-input{
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+}
+.monster-health-input{
+    width: 50%;
+    padding: 5px;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+}
+.monster-armor-input{
+    width: 50%;
+    padding: 5px;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+}
+.monster-delete-btn{
+    width: 3em;
+    padding: 5px;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+    vertical-align: left;
+}
+.monster-focuspoints-input{
+    width: 50%;
+    padding: 5px;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+}
+.monster-movingpoints-input{
+    width: 50%;
+    padding: 5px;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+}
