@@ -1,4 +1,4 @@
-import * as dbItem  from '/scripts/models/dbItem.js';
+import * as dbItem  from '../models/dbItem.js';
 
 
 export function save(data){
