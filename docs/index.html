@@ -106,18 +106,5 @@
     </script><!-- HTML BUTON ENDE -->
 
 
-
-    <script>
-        // Dynamische Ermittlung des Scopes für GitHub Pages Unterordner
-        const scope = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
-        
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js', { scope: scope })
-                    .then(reg => console.log('Service Worker registriert am Scope: ', reg.scope))
-                    .catch(err => console.error('Service Worker Registrierung fehlgeschlagen: ', err));
-            });
-        }
-    </script>
 </body>
 </html>
