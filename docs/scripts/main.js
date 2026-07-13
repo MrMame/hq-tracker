@@ -22,12 +22,28 @@ document.body.appendChild(wizard);
 
 
 
+// ======================================================================
+// Functions
+
+let showMonsterTrackerEntities = async () => {
+    trackerList.innerHTML = ''; // Clear the tracker list
+    // Load existing datasets from storage on page load
+    let items  = storage.getAllKeyValuePairs(); 
+    items.forEach(monsterTrackerEntityKeyValuePair => {
+        const trackerControl = trackerControlFactory.createMonsterTrackerControlFromMonsterEntity(monsterTrackerEntityKeyValuePair.value);
+        trackerList.appendChild(trackerControl);
+    });
+}
+
+
 
 // ======================================================================
 // EVENTS
 
 
-
+document.addEventListener('DOMContentLoaded', () => {
+    showMonsterTrackerEntities();
+});
 
 dbMonsterService.addEventListener('monsterSaved', (monsterSavedEvent) => {
     // console.log('Eintrag gespeichert:', monsterData);
@@ -37,13 +53,12 @@ dbMonsterService.addEventListener('monsterSaved', (monsterSavedEvent) => {
 
 dbMonsterService.addEventListener('monsterDbUpdated', (monsterDbUpdatedEvent) => {
     console.log('MonsterDB aktualisiert:', monsterDbUpdatedEvent);
-    trackerList.innerHTML = ''; // Clear the tracker list
-    monsterDbUpdatedEvent.detail.forEach(monsterTrackerEntityKeyValuePair => {
-        const trackerControl = trackerControlFactory.createMonsterTrackerControlFromMonsterEntity(monsterTrackerEntityKeyValuePair.value);
-        trackerList.appendChild(trackerControl);
-    });
+    showMonsterTrackerEntities();
 });
 
+
+// ======================================================================
+// Event Handlers for Buttons and Controls
 
 
 showMonsterTrackerWizardBtn.addEventListener('click', () => {
@@ -87,7 +102,7 @@ loadBtn.addEventListener('click', () => {
 });
 
 // Clear all datasets from storage
-document.getElementById('clearBtn').addEventListener('click', () => {
+clearBtn.addEventListener('click', () => {
     dbMonsterService.clearMonsterTrackerEntities();
     // Löscht den gesamten LocalStorage für diese Domain
     storage.clearAllData();
