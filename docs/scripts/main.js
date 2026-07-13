@@ -29,12 +29,21 @@ document.body.appendChild(wizard);
 
 
 
-dbMonsterService.addEventListener('eintragGespeichert', (event) => {
-    const savedData = event.detail;
-    console.log('Eintrag gespeichert:', savedData);
-    const trackerControl = trackerControlFactory.createMonsterTrackerControlWithInitialData(savedData);
-    trackerList.appendChild(trackerControl);
+dbMonsterService.addEventListener('monsterSaved', (monsterData) => {
+    // console.log('Eintrag gespeichert:', monsterData);
+    // const trackerControl = trackerControlFactory.createMonsterTrackerControlFromMonsterData(monsterData);
+    // trackerList.appendChild(trackerControl);
 });
+
+dbMonsterService.addEventListener('monsterUpdated', (monsterDatas) => {
+    console.log('MonsterDB aktualisiert:', monsterDatas);
+    trackerList.innerHTML = ''; // Clear the tracker list
+    monsterDatas.detail.forEach(monsterData => {
+        const trackerControl = trackerControlFactory.createMonsterTrackerControlFromMonsterData(monsterData);
+        trackerList.appendChild(trackerControl);
+    });
+});
+
 
 
 showMonsterTrackerWizardBtn.addEventListener('click', () => {
@@ -79,6 +88,7 @@ loadBtn.addEventListener('click', () => {
 
 // Clear all datasets from storage
 document.getElementById('clearBtn').addEventListener('click', () => {
+    dbMonsterService.clearMonsterTrackerData();
     // Löscht den gesamten LocalStorage für diese Domain
     storage.clearAllData();
     // Aktualisiert die Anzeige im Ausgabefeld sofort

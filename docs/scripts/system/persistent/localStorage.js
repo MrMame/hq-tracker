@@ -5,8 +5,10 @@ export function save(data){
     console.log("Speichere Daten in der Datenbank:", data);
     const timestamp = Date.now();
     const key = `user_${timestamp}`;
+    data.key = key; // Füge den Schlüssel zu den Daten hinzu
     localStorage.setItem(key, JSON.stringify(data));
     alert(`Gespeichert unter: ${key}`);
+    return key;
 }
 
 export function getAllData(){

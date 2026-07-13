@@ -2,6 +2,8 @@ export function createMonsterTrackerControl() {
     const container = document.createElement('div');
     container.classList.add('tracker-control');
 
+     let monsterKeySpan = document.createElement('span');
+    monsterKeySpan.classList.add('monster-key');
     
     let monsterNameInput = document.createElement('input');
     monsterNameInput.classList.add('monster-name-input');
@@ -41,7 +43,7 @@ export function createMonsterTrackerControl() {
         container.remove();
     });
 
-    
+    container.appendChild(monsterKeySpan);
     container.appendChild(monsterIcon);
     container.appendChild(monsterNameInput);
     container.appendChild(monsterHealthInput);
@@ -54,12 +56,13 @@ export function createMonsterTrackerControl() {
 }
 
 
-export function createMonsterTrackerControlWithInitialData(data) {
+export function createMonsterTrackerControlFromMonsterData(monsterData) {
     const container = createMonsterTrackerControl();
-    container.querySelector('.monster-name-input').value = data.name;
-    container.querySelector('.monster-health-input').value = data.health;
-    container.querySelector('.monster-armor-input').value = data.armor;
-    container.querySelector('.monster-focuspoints-input').value = data.focuspoints;
-    container.querySelector('.monster-movingpoints-input').value = data.movingpoints;
+    container.querySelector('.monster-key').innerText = monsterData.data.key;
+    container.querySelector('.monster-name-input').value = monsterData.data.name;
+    container.querySelector('.monster-health-input').value = monsterData.data.health;
+    container.querySelector('.monster-armor-input').value = monsterData.data.armor;
+    container.querySelector('.monster-focuspoints-input').value = monsterData.data.focus;
+    container.querySelector('.monster-movingpoints-input').value = monsterData.data.move;
     return container;
 }
