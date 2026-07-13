@@ -1,0 +1,37 @@
+#trackerWizard{
+    height: 80%;
+    width: 80%;
+
+    border: 2px solid #333; /* Falls du einen sichtbaren Rahmen hast */
+    border-radius: 12px;     /* Rundet alle vier Ecken ab */
+
+}
+
+/* Abdunklung des Hintergrunds (Webseite dahinter blockieren) */
+#trackerWizard::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px); /* Optional: Macht den Hintergrund leicht unscharf */
+}
+
+
+#imageSelectContainer{
+  display:flex;
+  flex-direction:row;
+  justify-content: center;
+}
+#imageSelectContainer img{
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  cursor: pointer;
+  border: 2px solid transparent; /* Standardrahmenfarbe */
+  border-radius: 8px; /* Abgerundete Ecken */
+  transition: border-color 0.3s, transform 0.3s; /* Sanfte Übergänge */
+}
+
+
+#statsInputContainer{
+  display:flex;
+  flex-direction:column;
+  gap: 10px; /* Abstand zwischen den Eingabefeldern */
+}

@@ -52,3 +52,14 @@ export function createMonsterTrackerControl() {
 
     return container;
 }
+
+
+export function createMonsterTrackerControlWithInitialData(data) {
+    const container = createMonsterTrackerControl();
+    container.querySelector('.monster-name-input').value = data.name;
+    container.querySelector('.monster-health-input').value = data.health;
+    container.querySelector('.monster-armor-input').value = data.armor;
+    container.querySelector('.monster-focuspoints-input').value = data.focuspoints;
+    container.querySelector('.monster-movingpoints-input').value = data.movingpoints;
+    return container;
+}

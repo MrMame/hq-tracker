@@ -1,15 +1,45 @@
 import * as storage from './system/persistent/localStorage.js';
 import * as trackerControlFactory from './ui/trackerControlFactory.js';
+import * as trackerWizardFactory from './ui/trackerWizardFactory.js';
+
+import {dbMonsterService} from './domain/persistent/monsterTrackerDb.js';
 
 
 const saveBtn = document.getElementById('saveBtn');
 const loadBtn = document.getElementById('loadBtn');
 const clearBtn = document.getElementById('clearBtn');
 const createMonsterTrackerBtn = document.getElementById('createMonsterTrackerBtn');
+const showMonsterTrackerWizardBtn = document.getElementById('showMonsterTrackerWizardBtn');
 
 const outputList = document.getElementById('outputList');
 const trackerList = document.getElementById('trackerList');
 
+
+
+// Create Website Elements
+const wizard = trackerWizardFactory.createTrackerWizard();
+document.body.appendChild(wizard);
+
+
+
+
+// ======================================================================
+// EVENTS
+
+
+
+
+dbMonsterService.addEventListener('eintragGespeichert', (event) => {
+    const savedData = event.detail;
+    console.log('Eintrag gespeichert:', savedData);
+    const trackerControl = trackerControlFactory.createMonsterTrackerControlWithInitialData(savedData);
+    trackerList.appendChild(trackerControl);
+});
+
+
+showMonsterTrackerWizardBtn.addEventListener('click', () => {
+   wizard.showModal(); // Show the dialog
+});
 
 
 createMonsterTrackerBtn.addEventListener('click', () => {
