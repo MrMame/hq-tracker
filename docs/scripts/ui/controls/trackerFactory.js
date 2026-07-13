@@ -1,3 +1,6 @@
+import {dbMonsterService} from '../../domain/persistent/monsterTrackerDb.js';
+
+
 export function createMonsterTrackerControl() {
     const container = document.createElement('div');
     container.classList.add('tracker-control');
@@ -40,7 +43,7 @@ export function createMonsterTrackerControl() {
 
     // EventHandelr for Delete Button
     monsterDeleteBtn.addEventListener('click', () => {
-        container.remove();
+        dbMonsterService.deleteMonsterTrackerEntity(container.querySelector('.monster-key').innerText);
     });
 
     container.appendChild(monsterKeySpan);
@@ -56,13 +59,13 @@ export function createMonsterTrackerControl() {
 }
 
 
-export function createMonsterTrackerControlFromMonsterData(monsterData) {
+export function createMonsterTrackerControlFromMonsterEntity(monsterTrackerEntity) {
     const container = createMonsterTrackerControl();
-    container.querySelector('.monster-key').innerText = monsterData.data.key;
-    container.querySelector('.monster-name-input').value = monsterData.data.name;
-    container.querySelector('.monster-health-input').value = monsterData.data.health;
-    container.querySelector('.monster-armor-input').value = monsterData.data.armor;
-    container.querySelector('.monster-focuspoints-input').value = monsterData.data.focus;
-    container.querySelector('.monster-movingpoints-input').value = monsterData.data.move;
+    container.querySelector('.monster-key').innerText = monsterTrackerEntity.key;
+    container.querySelector('.monster-name-input').value = monsterTrackerEntity.name;
+    container.querySelector('.monster-health-input').value = monsterTrackerEntity.health;
+    container.querySelector('.monster-armor-input').value = monsterTrackerEntity.armor;
+    container.querySelector('.monster-focuspoints-input').value = monsterTrackerEntity.focus;
+    container.querySelector('.monster-movingpoints-input').value = monsterTrackerEntity.move;
     return container;
 }

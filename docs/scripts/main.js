@@ -1,6 +1,6 @@
 import * as storage from './system/persistent/localStorage.js';
-import * as trackerControlFactory from './ui/trackerControlFactory.js';
-import * as trackerWizardFactory from './ui/trackerWizardFactory.js';
+import * as trackerControlFactory from './ui/controls/trackerFactory.js';
+import * as trackerWizardFactory from './ui/controls/trackerWizardFactory.js';
 
 import {dbMonsterService} from './domain/persistent/monsterTrackerDb.js';
 
@@ -29,17 +29,17 @@ document.body.appendChild(wizard);
 
 
 
-dbMonsterService.addEventListener('monsterSaved', (monsterData) => {
+dbMonsterService.addEventListener('monsterSaved', (monsterSavedEvent) => {
     // console.log('Eintrag gespeichert:', monsterData);
     // const trackerControl = trackerControlFactory.createMonsterTrackerControlFromMonsterData(monsterData);
     // trackerList.appendChild(trackerControl);
 });
 
-dbMonsterService.addEventListener('monsterUpdated', (monsterDatas) => {
-    console.log('MonsterDB aktualisiert:', monsterDatas);
+dbMonsterService.addEventListener('monsterDbUpdated', (monsterDbUpdatedEvent) => {
+    console.log('MonsterDB aktualisiert:', monsterDbUpdatedEvent);
     trackerList.innerHTML = ''; // Clear the tracker list
-    monsterDatas.detail.forEach(monsterData => {
-        const trackerControl = trackerControlFactory.createMonsterTrackerControlFromMonsterData(monsterData);
+    monsterDbUpdatedEvent.detail.forEach(monsterTrackerEntityKeyValuePair => {
+        const trackerControl = trackerControlFactory.createMonsterTrackerControlFromMonsterEntity(monsterTrackerEntityKeyValuePair.value);
         trackerList.appendChild(trackerControl);
     });
 });
@@ -72,7 +72,7 @@ loadBtn.addEventListener('click', () => {
     // Clear output list first
     outputList.innerHTML = '';
     // Get and check for Items 
-    let items  = storage.getAllData();
+    let items  = storage.getAllKeyValuePairs();
     if (items.length === 0) {
         outputList.innerHTML = '<span class="no-data">Die Datenbank ist leer.</span>';
         return;
@@ -81,14 +81,14 @@ loadBtn.addEventListener('click', () => {
     items.forEach(item => {
         const itemDiv = document.createElement('div');
         itemDiv.className = 'data-item';
-        itemDiv.innerHTML = `<strong>${item.key}:</strong> ${JSON.stringify(item.data, null, 2)}`;
+        itemDiv.innerHTML = `<strong>${item.key}:</strong> ${JSON.stringify(item.value, null, 2)}`;
         outputList.appendChild(itemDiv);
     });
 });
 
 // Clear all datasets from storage
 document.getElementById('clearBtn').addEventListener('click', () => {
-    dbMonsterService.clearMonsterTrackerData();
+    dbMonsterService.clearMonsterTrackerEntities();
     // Löscht den gesamten LocalStorage für diese Domain
     storage.clearAllData();
     // Aktualisiert die Anzeige im Ausgabefeld sofort

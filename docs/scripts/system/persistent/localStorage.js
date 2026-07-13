@@ -7,11 +7,11 @@ export function save(data){
     const key = `user_${timestamp}`;
     data.key = key; // Füge den Schlüssel zu den Daten hinzu
     localStorage.setItem(key, JSON.stringify(data));
-    alert(`Gespeichert unter: ${key}`);
+    //alert(`Gespeichert unter: ${key}`);
     return key;
 }
 
-export function getAllData(){
+export function getAllKeyValuePairs(){
     let items = [];
      // Alle Schlüssel im LocalStorage durchlaufen
     for (let i = 0; i < localStorage.length; i++) {
@@ -20,7 +20,7 @@ export function getAllData(){
         const parsedData = dbItem.parse(data);
         const dataItem = {
             key: key,
-            data: parsedData
+            value: parsedData
         };
         // Element an die Liste anhängen
         items.push(dataItem);
@@ -30,4 +30,8 @@ export function getAllData(){
 
 export function clearAllData(){
     localStorage.clear();
+}
+
+export function deleteKeyValuePair(key){
+    localStorage.removeItem(key);
 }

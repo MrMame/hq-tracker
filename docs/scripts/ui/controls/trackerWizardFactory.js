@@ -1,4 +1,5 @@
-import {dbMonsterService} from '../domain/persistent/monsterTrackerDb.js';
+import {dbMonsterService} from '../../domain/persistent/monsterTrackerDb.js';
+import {MonsterTrackerEntity} from '../../domain/models/monsterTrackerEntity.js';
 
 
 export function createTrackerWizardOLD() {
@@ -72,14 +73,9 @@ export function createTrackerWizard() {
         const focus = parseInt(element.querySelector('#wizard-focuspoints-input').value, 10);
         const move = parseInt(element.querySelector('#wizard-movingpoints-input').value, 10);
 
-        dbMonsterService.addMonsterTrackerData({
-            name,
-            image: selectedImage,
-            health,
-            armor,
-            focus,
-            move
-        });
+        const newMonsterTrackerEntity = new MonsterTrackerEntity(null, name, health, armor, focus, move);
+
+        dbMonsterService.addMonsterTrackerEntity(newMonsterTrackerEntity);
         element.close();
 
     });

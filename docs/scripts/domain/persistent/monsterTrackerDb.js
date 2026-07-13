@@ -5,13 +5,13 @@ import * as storage from '../../system/persistent/localStorage.js';
 class MonsterDbService extends EventTarget{
 
 
-    async addMonsterTrackerData(monsterData) {
-        let key = storage.save(monsterData);
+    async addMonsterTrackerEntity(monsterTrackerEntity) {
+        let key = storage.save(monsterTrackerEntity);
         const monsterSavedEvent = new CustomEvent('monsterSaved', {
-            detail: monsterData
+            detail: monsterTrackerEntity
         });
-        const monsterDbUpdatedEvent = new CustomEvent('monsterUpdated', {
-            detail: storage.getAllData()
+        const monsterDbUpdatedEvent = new CustomEvent('monsterDbUpdated', {
+            detail: storage.getAllKeyValuePairs()
         });
         // 4. Das Event abfeuern
         this.dispatchEvent(monsterSavedEvent);
@@ -19,17 +19,25 @@ class MonsterDbService extends EventTarget{
     }
 
 
-    async clearMonsterTrackerData() {
+    async clearMonsterTrackerEntities() {
         storage.clearAllData();
-        const monsterDbUpdatedEvent = new CustomEvent('monsterUpdated', {
-            detail: storage.getAllData()
+        const monsterDbUpdatedEvent = new CustomEvent('monsterDbUpdated', {
+            detail: storage.getAllKeyValuePairs()
         });
         this.dispatchEvent(monsterDbUpdatedEvent);
     }
 
-    async updateMonsterTrackerData(monsterData) {
+    async updateMonsterTrackerEntities(monsterTrackerEntity) {
         // Update the data in localStorage
-        storage.save(monsterData);  
+        storage.save(monsterTrackerEntity);  
+    }
+
+    async deleteMonsterTrackerEntity(key) {
+        storage.deleteKeyValuePair(key);
+        const monsterDbUpdatedEvent = new CustomEvent('monsterDbUpdated', {
+            detail: storage.getAllKeyValuePairs()
+        });
+        this.dispatchEvent(monsterDbUpdatedEvent);
     }
 
 }
