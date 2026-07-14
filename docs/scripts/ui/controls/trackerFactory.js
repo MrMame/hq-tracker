@@ -5,9 +5,6 @@ export function createMonsterTrackerControl() {
     const container = document.createElement('div');
     container.classList.add('tracker-control');
 
-     let monsterKeySpan = document.createElement('span');
-    monsterKeySpan.classList.add('monster-key');
-    
     let monsterNameInput = document.createElement('input');
     monsterNameInput.classList.add('monster-name-input');
     monsterNameInput.type = 'text';
@@ -53,7 +50,7 @@ export function createMonsterTrackerControl() {
 
     // EventHandelr for Save Button
     monsterSaveBtn.addEventListener('click', () => {
-        const monsterKey = container.querySelector('.monster-key').innerText;
+        const monsterKey = container.dataset.key; // Retrieve the key from the data attribute
         const monsterData = {
             name: container.querySelector('.monster-name-input').value,
             health: container.querySelector('.monster-health-input').value,
@@ -71,7 +68,7 @@ export function createMonsterTrackerControl() {
 
 
 
-    container.appendChild(monsterKeySpan);
+    // container.appendChild(monsterKeySpan);
     container.appendChild(monsterIcon);
     container.appendChild(monsterNameInput);
     container.appendChild(monsterHealthInput);
@@ -87,7 +84,7 @@ export function createMonsterTrackerControl() {
 
 export function createMonsterTrackerControlFromMonsterEntity(monsterTrackerEntity) {
     const container = createMonsterTrackerControl();
-    container.querySelector('.monster-key').innerText = monsterTrackerEntity.key;
+    container.dataset.key = monsterTrackerEntity.key; // Set the data-key attribute for easier access
     container.querySelector('.monster-name-input').value = monsterTrackerEntity.name;
     container.querySelector('.monster-health-input').value = monsterTrackerEntity.health;
     container.querySelector('.monster-armor-input').value = monsterTrackerEntity.armor;

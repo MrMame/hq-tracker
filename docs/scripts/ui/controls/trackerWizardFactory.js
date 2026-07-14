@@ -2,35 +2,6 @@ import {dbMonsterService} from '../../domain/persistent/monsterTrackerDb.js';
 import {MonsterTrackerEntity} from '../../domain/models/monsterTrackerEntity.js';
 
 
-export function createTrackerWizardOLD() {
-    const container = document.createElement('dialog');
-    container.id = 'trackerWizard';
-    container.classList.add('tracker-wizard');  
-
-    let wizardHeadline = document.createElement('h2');
-    wizardHeadline.textContent = 'Wizard Headline';
-    
-    let monsterNameInput = document.createElement('input');
-    monsterNameInput.classList.add('monster-name-input');
-    monsterNameInput.type = 'text';
-    monsterNameInput.placeholder = 'Monster Name';
-
-    let closeBtn = document.createElement('button');
-    closeBtn.id = 'closeBtn';
-    closeBtn.textContent = 'Close';
-
-    // Dialog schließen
-    closeBtn.addEventListener('click', () => {
-        container.close();
-    });
-
-    container.appendChild(wizardHeadline);
-    container.appendChild(monsterNameInput);
-    container.appendChild(closeBtn);
-
-    return container;
-}
-
 export function createTrackerWizard() {
     const htmlString = `
         <dialog id="trackerWizard" class="tracker-wizard">
