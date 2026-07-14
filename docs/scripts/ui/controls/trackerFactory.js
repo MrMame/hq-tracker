@@ -46,6 +46,31 @@ export function createMonsterTrackerControl() {
         dbMonsterService.deleteMonsterTrackerEntity(container.querySelector('.monster-key').innerText);
     });
 
+
+    let monsterSaveBtn = document.createElement('button');
+    monsterSaveBtn.classList.add('monster-save-btn');
+    monsterSaveBtn.textContent = 'Save';
+
+    // EventHandelr for Save Button
+    monsterSaveBtn.addEventListener('click', () => {
+        const monsterKey = container.querySelector('.monster-key').innerText;
+        const monsterData = {
+            name: container.querySelector('.monster-name-input').value,
+            health: container.querySelector('.monster-health-input').value,
+            armor: container.querySelector('.monster-armor-input').value,
+            focus: container.querySelector('.monster-focuspoints-input').value,
+            move: container.querySelector('.monster-movingpoints-input').value
+        };
+        dbMonsterService.updateMonsterTrackerEntity(monsterKey, monsterData);
+    });
+
+
+
+
+
+
+
+
     container.appendChild(monsterKeySpan);
     container.appendChild(monsterIcon);
     container.appendChild(monsterNameInput);
@@ -53,6 +78,7 @@ export function createMonsterTrackerControl() {
     container.appendChild(monsterArmorInput);
     container.appendChild(monsterFocuspointsInput);
     container.appendChild(monsterMovingPointsInput);
+    container.appendChild(monsterSaveBtn);
     container.appendChild(monsterDeleteBtn);
 
     return container;

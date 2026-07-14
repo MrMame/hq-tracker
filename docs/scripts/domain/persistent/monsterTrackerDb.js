@@ -40,8 +40,17 @@ class MonsterDbService extends EventTarget{
         this.dispatchEvent(monsterDbUpdatedEvent);
     }
 
+    async updateMonsterTrackerEntity(key, updatedData) {
+        // Retrieve the existing entity from localStorage
+        const existingEntity = storage.getKeyValuePair(key);
+        if (existingEntity) {
+            // Update the properties of the existing entity with the new data
+            Object.assign(existingEntity, updatedData);
+            // Save the updated entity back to localStorage
+            storage.save(existingEntity);
+        }
 }
-
+}
 
 // Eine einzige Instanz exportieren (Singleton-Muster)
 export const dbMonsterService = new MonsterDbService();
