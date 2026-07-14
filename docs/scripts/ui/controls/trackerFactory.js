@@ -40,7 +40,7 @@ export function createMonsterTrackerControl() {
 
     // EventHandelr for Delete Button
     monsterDeleteBtn.addEventListener('click', () => {
-        dbMonsterService.deleteMonsterTrackerEntity(container.querySelector('.monster-key').innerText);
+        dbMonsterService.deleteMonsterTrackerEntity(container.dataset.key); // Use the key from the data attribute to delete the entity
     });
 
 
@@ -62,13 +62,6 @@ export function createMonsterTrackerControl() {
     });
 
 
-
-
-
-
-
-
-    // container.appendChild(monsterKeySpan);
     container.appendChild(monsterIcon);
     container.appendChild(monsterNameInput);
     container.appendChild(monsterHealthInput);
