@@ -11,8 +11,14 @@ export function createTrackerWizard() {
             </div>
             <div id="colorSelectContainer" class="color-select-container">
                 <div class="color-option" data-color="#FF0000" style="background-color: #FF0000;"></div>
-                <div class="color-option" data-color="#00FF00" style="background-color: #00FF00;"></div>
-                <div class="color-option" data-color="#0000FF" style="background-color: #0000FF;"></div>
+                <div class="color-option" data-color="#0084ff" style="background-color: #0084ff;"></div>
+                <div class="color-option" data-color="#002900" style="background-color: #002900;"></div>
+                <div class="color-option" data-color="#ff83f5" style="background-color: #ff83f5;"></div>
+                <div class="color-option" data-color="#ffffff" style="background-color: #ffffff;"></div>
+                <div class="color-option" data-color="#ffbf6c" style="background-color: #ffbf6c;"></div>
+                <div class="color-option" data-color="#b48400" style="background-color: #b48400;"></div>
+                <div class="color-option" data-color="#720042" style="background-color: #720042;"></div>
+                
             </div>
             <div id="statsInputContainer" class="stats-input-container">
                 <label>Name
