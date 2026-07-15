@@ -1,0 +1,88 @@
+#trackerList{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+        justify-content: center;
+
+}
+
+
+
+.tracker-control{
+    height: 10em;
+    width: 20em;
+    background-color: #d42525;
+    display:flex;
+    flex-direction: row;
+    padding: 10px;
+}
+
+
+.tracker-control .button-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.tracker-control .monster-icon{
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+   padding:5px;
+}
+
+
+.tracker-control .input-container{
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    width: 50%;
+    padding: 5px;
+}
+
+.tracker-control label{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: 0.8em;
+}
+
+.tracker-control input[type="number"] {
+    height:auto;
+    margin:0px;
+    padding: 5px;
+    width: 60%;
+}
+
+.tracker-control .monster-name-input{
+    width: 100%;
+    box-sizing: border-box;
+}
+.tracker-control .monster-health-input{
+    width: 50%;
+    box-sizing: border-box;
+}
+.tracker-control .monster-armor-input{
+    width: 50%;
+    box-sizing: border-box;
+}
+.tracker-control .monster-focuspoints-input{
+    width: 50%;
+    box-sizing: border-box;
+}
+.tracker-control .monster-movingpoints-input{
+    width: 50%;
+    box-sizing: border-box;
+}
+
+.tracker-control .monster-delete-btn{
+    width: 3em;
+    height: 3em;
+    box-sizing: border-box;
+    vertical-align: left;
+}

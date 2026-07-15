@@ -1,7 +1,66 @@
 import {dbMonsterService} from '../../domain/persistent/monsterTrackerDb.js';
 
 
+
 export function createMonsterTrackerControl() {
+    const htmlString = `
+        <div class="tracker-control">
+        
+        <div class="button-container">
+            <button class="monster-delete-btn">X</button>
+        </div>
+            <img class="monster-icon" src="img/monster-icon-abscheulichkeit.png">
+            <div class="input-container">
+                <input class="monster-name-input" type="text" placeholder="Monster Name">
+                <label>Health
+                    <input class="monster-health-input" type="number" placeholder="Health">
+                </label>
+                <label>Armor
+                    <input class="monster-armor-input" type="number" placeholder="Armor">
+                </label>
+                <label>Focus
+                    <input class="monster-focuspoints-input" type="number" placeholder="Focus">
+                </label>
+                <label>Move
+                    <input class="monster-movingpoints-input" type="number" placeholder="Move">
+                </label>
+            </div>
+        </div>
+    `;
+
+    const element = document.createRange().createContextualFragment(htmlString).firstElementChild;
+
+
+    // Input Fields Store Value into Database on Change
+    element.querySelectorAll('input').forEach(input => {
+        input.addEventListener('change', () => {
+            if (input.value != input.dataset.previousValue) {
+                //Changed
+                dbMonsterService.updateMonsterTrackerEntity(element.dataset.key, {
+                    name: element.querySelector('.monster-name-input').value,
+                    health: element.querySelector('.monster-health-input').value,
+                    armor: element.querySelector('.monster-armor-input').value,
+                    focus: element.querySelector('.monster-focuspoints-input').value,
+                    move: element.querySelector('.monster-movingpoints-input').value
+                }); 
+            }
+            input.dataset.previousValue = input.value; // Store the previous value in a data attribute
+        });
+    });
+
+
+    // Event-Handler für den Delete-Button
+    element.querySelector('.monster-delete-btn').addEventListener('click', () => {
+        dbMonsterService.deleteMonsterTrackerEntity(element.dataset.key);
+    });
+
+
+    return element;
+}
+
+
+
+export function createMonsterTrackerControl_OLD() {
     const container = document.createElement('div');
     container.classList.add('tracker-control');
 
