@@ -9,25 +9,36 @@ export function createTrackerWizard() {
                 <img class="monster-icon" src="img/monster-icon-abscheulichkeit.png" data-image="img/monster-icon-abscheulichkeit.png">
                 <img class="monster-icon" src="img/monster-icon-abscheulichkeit.png" data-image="img/monster-icon-drache.png">
             </div>
+            <div id="colorSelectContainer" class="color-select-container">
+                <div class="color-option" data-color="#FF0000" style="background-color: #FF0000;"></div>
+                <div class="color-option" data-color="#00FF00" style="background-color: #00FF00;"></div>
+                <div class="color-option" data-color="#0000FF" style="background-color: #0000FF;"></div>
+            </div>
             <div id="statsInputContainer" class="stats-input-container">
                 <label>Name
                     <input id="wizard-name-input" type="text" placeholder="Monster Name">
                 </label>
                 <label>Health
                     <input id="wizard-health-input" type="number" placeholder="Health">
-            </label>
-            <label>Armor
-                <input id="wizard-armor-input" type="number" placeholder="Armor">
-            </label>
-            <label>Focus
-                <input id="wizard-focuspoints-input" type="number" placeholder="Focus">
-            </label>
-            <label>Move
-                <input id="wizard-movingpoints-input" type="number" placeholder="Move">
-            </label>
+                </label>
+                <label>Armor
+                    <input id="wizard-armor-input" type="number" placeholder="Armor">
+                </label>
+                <label>Focus
+                    <input id="wizard-focuspoints-input" type="number" placeholder="Focus">
+                </label>
+                <label>Move
+                    <input id="wizard-movingpoints-input" type="number" placeholder="Move">
+                </label>
             </div>
-            <button id="wizard-create-btn">Create</button>
-            <button id="wizard-cancel-btn">Cancel</button>
+            <div id="templatebuttonContainer" class="button-container">
+                <button id="wizard-template-elite-btn">Create Elite</button>
+                <button id="wizard-template-standard-btn">Create Standard</button>
+            </div>
+            <div id="buttonContainer" class="button-container">
+                <button id="wizard-create-btn">Create</button>
+                <button id="wizard-cancel-btn">Cancel</button>
+            </div>
         </dialog>
     `;
 
