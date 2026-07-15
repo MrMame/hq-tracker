@@ -6,8 +6,21 @@ export function createTrackerWizard() {
     const htmlString = `
         <dialog id="trackerWizard" class="tracker-wizard">
             <div id="imageSelectContainer" class="image-select-container">
-                <img class="monster-icon" src="img/monster-icon-abscheulichkeit.png" data-image="img/monster-icon-abscheulichkeit.png">
-                <img class="monster-icon" src="img/monster-icon-abscheulichkeit.png" data-image="img/monster-icon-drache.png">
+                <div class="imageSelectorRow">
+                    <img class="monster-icon" src="img/monster-icon-Goblin.png" data-image="img/monster-icon-Goblin.png">
+                    <img class="monster-icon" src="img/monster-icon-Orc.png" data-image="img/monster-icon-Orc.png">
+                    <img class="monster-icon" src="img/monster-icon-ChaosWarrior.png" data-image="img/monster-icon-ChaosWarrior.png">
+                </div>
+                <div class="imageSelectorRow">
+                    <img class="monster-icon" src="img/monster-icon-FimirAbomination.png" data-image="img/monster-icon-FimirAbomination.png">
+                    <img class="monster-icon" src="img/monster-icon-Gargoyle.png" data-image="img/monster-icon-Gargoyle.png">
+                    <img class="monster-icon" src="img/monster-icon-Mummy.png" data-image="img/monster-icon-Mummy.png">
+                </div>
+                <div class="imageSelectorRow">
+                    <img class="monster-icon" src="img/monster-icon-Skeleton.png" data-image="img/monster-icon-Skeleton.png">
+                    <img class="monster-icon" src="img/monster-icon-Zombie.png" data-image="img/monster-icon-Zombie.png">
+                    <img class="monster-icon" src="img/monster-icon-Hexer.png" data-image="img/monster-icon-Hexer.png">
+                </div>
             </div>
             <div id="colorSelectContainer" class="color-select-container">
                 <div class="color-option" data-color="#FF0000" style="background-color: #FF0000;"></div>
@@ -19,6 +32,10 @@ export function createTrackerWizard() {
                 <div class="color-option" data-color="#b48400" style="background-color: #b48400;"></div>
                 <div class="color-option" data-color="#720042" style="background-color: #720042;"></div>
                 
+            </div>
+            <div id="templatebuttonContainer" class="button-container">
+                <button id="wizard-template-standard-btn">Standard</button>
+                <button id="wizard-template-elite-btn">Elite</button>
             </div>
             <div id="statsInputContainer" class="stats-input-container">
                 <label>Name
@@ -36,10 +53,6 @@ export function createTrackerWizard() {
                 <label>Move
                     <input id="wizard-movingpoints-input" type="number" placeholder="Move">
                 </label>
-            </div>
-            <div id="templatebuttonContainer" class="button-container">
-                <button id="wizard-template-elite-btn">Create Elite</button>
-                <button id="wizard-template-standard-btn">Create Standard</button>
             </div>
             <div id="buttonContainer" class="button-container">
                 <button id="wizard-create-btn">Create</button>
