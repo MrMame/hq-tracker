@@ -78,6 +78,15 @@
   justify-content: center;
   gap: 10px; /* Abstand zwischen den Buttons */
   margin:5px;
+  height: 10vh;
+}
+#templatebuttonContainer button{
+  height: 10vh;
+  width: 10vh;
+  background-color: lightgrey;
+}
+#templatebuttonContainer button.selected{
+  background-color: red;
 }
 
 #buttonContainer{

@@ -2,8 +2,10 @@
 
 export class MonsterTrackerEntity {
 
-    constructor(key,name, health, armor, focus, move) {
+    constructor(key,image,color,name, health, armor, focus, move) {
         this.key = key;
+        this.image = image;
+        this.color = color;
         this.name = name;
         this.health = health;
         this.armor = armor;
