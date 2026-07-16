@@ -1,10 +1,11 @@
-import * as storage from './system/persistent/localStorage.js';
+// import * as storage from './system/persistent/localStorage.js';
+import {MonsterDbService} from './domain/persistent/monsterTrackerDb.js'
 import * as trackerControlFactory from './ui/controls/trackerFactory.js';
 import * as trackerWizardFactory from './ui/controls/trackerWizardFactory.js';
 
 import {dbMonsterService} from './domain/persistent/monsterTrackerDb.js';
 
-
+const monsterDB = new MonsterDbService();
 const showMonsterTrackerWizardBtn = document.getElementById('showMonsterTrackerWizardBtn');
 const trackerList = document.getElementById('trackerList');
 
@@ -21,8 +22,9 @@ document.body.appendChild(wizard);
 let showMonsterTrackerEntities = async () => {
     trackerList.innerHTML = ''; // Clear the tracker list
     // Load existing datasets from storage on page load
-    let items  = storage.getAllKeyValuePairs(); 
-    items.forEach(monsterTrackerEntityKeyValuePair => {
+    // let items  = storage.getAllKeyValuePairs(); 
+    let monsters  = await monsterDB.getAllMonsterTrackerEntitiesSortByMonsterType(); 
+    monsters.forEach(monsterTrackerEntityKeyValuePair => {
         const trackerControl = trackerControlFactory.createMonsterTrackerControlFromMonsterEntity(monsterTrackerEntityKeyValuePair.value);
         trackerList.appendChild(trackerControl);
     });

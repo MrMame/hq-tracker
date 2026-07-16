@@ -5,10 +5,9 @@ import {dbMonsterService} from '../../domain/persistent/monsterTrackerDb.js';
 export function createMonsterTrackerControl() {
     const htmlString = `
         <div class="tracker-control">
-        
-        <div class="button-container">
-            <button class="monster-delete-btn">X</button>
-        </div>
+            <div class="button-container">
+                <button class="monster-delete-btn">X</button>
+            </div>
             <img class="monster-icon" src="img/monster-icon-abscheulichkeit.png">
             <div class="input-container">
                 <input class="monster-name-input" type="text" placeholder="Monster Name">

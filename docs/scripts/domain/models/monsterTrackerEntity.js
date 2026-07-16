@@ -1,8 +1,8 @@
-
+import * as monsterTypes from '../../domain/models/monsterTypes.js'
 
 export class MonsterTrackerEntity {
 
-    constructor(key,image,color,name, health, armor, focus, move) {
+    constructor(key,image,color,name, health, armor, focus, move,  type) {
         this.key = key;
         this.image = image;
         this.color = color;
@@ -11,6 +11,23 @@ export class MonsterTrackerEntity {
         this.armor = armor;
         this.focus = focus;
         this.move = move;
+        this.monsterType = type
+    }
+
+    static getMonsterTypeFromImagePath(imagePath){
+        let img = imagePath;
+        let retType;
+        if(img.includes(monsterTypes.ChaosWarrior.TYPENAME)){retType = monsterTypes.ChaosWarrior;}
+        else if(img.includes(monsterTypes.Fimir.TYPENAME)){retType = monsterTypes.Fimir;}
+        else if(img.includes(monsterTypes.Gargoyle.TYPENAME)){retType = monsterTypes.Gargoyle}
+        else if(img.includes(monsterTypes.Goblin.TYPENAME)){retType = monsterTypes.Goblin;}
+        else if(img.includes(monsterTypes.Hexer.TYPENAME)){retType = monsterTypes.Hexer}
+        else if(img.includes(monsterTypes.Mummy.TYPENAME)){retType = monsterTypes.Mummy}
+        else if(img.includes(monsterTypes.Orc.TYPENAME)){retType = monsterTypes.Orc}
+        else if(img.includes(monsterTypes.Skeleton.TYPENAME)){retType = monsterTypes.Skeleton}
+        else if(img.includes(monsterTypes.Zombie.TYPENAME)){retType = monsterTypes.Zombie}
+        else{retType = monsterTypes.Unknown}
+        return retType;
     }
  
 }

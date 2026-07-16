@@ -1,8 +1,28 @@
 import * as storage from '../../system/persistent/localStorage.js';
+import {MonsterTrackerEntity} from '../../domain/models/monsterTrackerEntity.js'
 
 
 
-class MonsterDbService extends EventTarget{
+export class MonsterDbService extends EventTarget{
+
+
+    async getAllMonsterTrackerEntitiesSortByImages(){
+        let items = storage.getAllKeyValuePairs();
+        let sorteditems = items.sort((a,b) => {
+            return a.value.image.localeCompare(b.value.image);
+        });
+        return sorteditems;
+    }
+    async getAllMonsterTrackerEntitiesSortByMonsterType(){
+        let items = storage.getAllKeyValuePairs();
+        let sorteditems = items.sort((a,b) => {
+            let sortNumTypeA = MonsterTrackerEntity.getMonsterTypeFromImagePath(a.value.image).SORTNUM_TYPE;
+            let sortNumTypeB = MonsterTrackerEntity.getMonsterTypeFromImagePath(b.value.image).SORTNUM_TYPE;
+            return sortNumTypeA - sortNumTypeB;
+        });
+        return sorteditems;
+    }
+
 
 
     async addMonsterTrackerEntity(monsterTrackerEntity) {
@@ -27,10 +47,10 @@ class MonsterDbService extends EventTarget{
         this.dispatchEvent(monsterDbUpdatedEvent);
     }
 
-    async updateMonsterTrackerEntities(monsterTrackerEntity) {
-        // Update the data in localStorage
-        storage.save(monsterTrackerEntity);  
-    }
+    // async updateMonsterTrackerEntities(monsterTrackerEntity) {
+    //     // Update the data in localStorage
+    //     storage.save(monsterTrackerEntity);  
+    // }
 
     async deleteMonsterTrackerEntity(key) {
         storage.deleteKeyValuePair(key);

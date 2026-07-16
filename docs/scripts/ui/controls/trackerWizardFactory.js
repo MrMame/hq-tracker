@@ -90,7 +90,8 @@ export function createTrackerWizard() {
         const armor = parseInt(element.querySelector('#wizard-armor-input').value, 10);
         const focus = parseInt(element.querySelector('#wizard-focuspoints-input').value, 10);
         const move = parseInt(element.querySelector('#wizard-movingpoints-input').value, 10);
-        const newMonsterTrackerEntity = new MonsterTrackerEntity(null, selectedImage,color, name, health, armor, focus, move);
+        const monsterType = MonsterTrackerEntity.getMonsterTypeFromImagePath(selectedImage);
+        const newMonsterTrackerEntity = new MonsterTrackerEntity(null, selectedImage,color, name, health, armor, focus, move, monsterType);
         dbMonsterService.addMonsterTrackerEntity(newMonsterTrackerEntity);
         element.close();
     });
