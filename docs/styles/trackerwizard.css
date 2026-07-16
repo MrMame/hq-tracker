@@ -26,7 +26,7 @@
   justify-content: center;
 }
 #imageSelectContainer img{
-  width: 15%;
+  width: 10vh;
   height: auto;
   margin: 5px;
   cursor: pointer;
@@ -48,10 +48,12 @@
   flex-direction:row;
   justify-content: center;
   align-items: center;
+    flex-wrap: wrap;
+
 }
 #colorSelectContainer .color-option{
-  width: 25px;
-  height: 25px;
+  width: 5vh;
+  height: 5vh;
   margin: 5px;
   cursor: pointer;
   border: 2px solid transparent; /* Standardrahmenfarbe */
@@ -59,8 +61,8 @@
   transition: border-color 0.3s, transform 0.3s; /* Sanfte Übergänge */
 }
 #colorSelectContainer .color-option.selected{
-  width: 50px;
-  height: 50px;
+  width: 7vh;
+  height: 7vh;
   #border: 10px solid black;
 }
 
