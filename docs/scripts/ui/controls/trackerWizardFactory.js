@@ -4,7 +4,7 @@ import {MonsterTrackerEntity} from '../../domain/models/monsterTrackerEntity.js'
 
 export function createTrackerWizard() {
     const htmlString = `
-        <dialog id="trackerWizard" class="tracker-wizard">
+        <dialog id="trackerWizard" class="tracker-wizard" closedby="any">
             <div id="imageSelectContainer" class="image-select-container">
                 <div class="imageSelectorRow">
                     <img class="monster-icon selected" src="img/monster-icon-Goblin.png" data-image="img/monster-icon-Goblin.png">

@@ -2,7 +2,7 @@ import * as monsterTypes from '../../domain/models/monsterTypes.js'
 
 export class MonsterTrackerEntity {
 
-    constructor(key,image,color,name, health, armor, focus, move,  type) {
+    constructor(key,image,color,name, health, armor, focus, move,  monsterType) {
         this.key = key;
         this.image = image;
         this.color = color;
@@ -11,7 +11,7 @@ export class MonsterTrackerEntity {
         this.armor = armor;
         this.focus = focus;
         this.move = move;
-        this.monsterType = type
+        this.monsterType = monsterType
     }
 
     static getMonsterTypeFromImagePath(imagePath){
@@ -28,6 +28,7 @@ export class MonsterTrackerEntity {
         else if(img.includes(monsterTypes.Zombie.TYPENAME)){retType = monsterTypes.Zombie}
         else{retType = monsterTypes.Unknown}
         return retType;
+ 
     }
  
 }

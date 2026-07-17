@@ -2,7 +2,7 @@ import {dbMonsterService} from '../../domain/persistent/monsterTrackerDb.js';
 
 
 
-export function createMonsterTrackerControl() {
+export function createMonsterTrackerControl(elMonsterTrackerEventDialog) {
     const htmlString = `
         <div class="tracker-control">
             <div class="button-container">
@@ -28,6 +28,19 @@ export function createMonsterTrackerControl() {
     `;
 
     const element = document.createRange().createContextualFragment(htmlString).firstElementChild;
+
+    
+
+    element.addEventListener('click',(el) => {
+        dbMonsterService.getMonsterTrackerEntity(element.dataset.key).then(ent => {
+            elMonsterTrackerEventDialog.dataset.key = element.dataset.key;
+            elMonsterTrackerEventDialog.querySelector('#tracker-event-dialog-health-input').value = ent.health;
+            elMonsterTrackerEventDialog.querySelector('#tracker-event-dialog-armor-input').value = ent.armor;
+            elMonsterTrackerEventDialog.querySelector('#tracker-event-dialog-focuspoints-input').value = ent.focus;
+            elMonsterTrackerEventDialog.showModal();
+        })
+    });
+
 
 
     // Input Fields Store Value into Database on Change
@@ -60,8 +73,8 @@ export function createMonsterTrackerControl() {
 
 
 
-export function createMonsterTrackerControlFromMonsterEntity(monsterTrackerEntity) {
-    const container = createMonsterTrackerControl();
+export function createMonsterTrackerControlFromMonsterEntity(elMonsterTrackerEventDialog, monsterTrackerEntity) {
+    const container = createMonsterTrackerControl(elMonsterTrackerEventDialog);
     container.dataset.key = monsterTrackerEntity.key; // Set the data-key attribute for easier access
     container.querySelector('.monster-icon').src = monsterTrackerEntity.image;
     container.style.backgroundColor = monsterTrackerEntity.color;

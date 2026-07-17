@@ -2,6 +2,7 @@
 import {MonsterDbService} from './domain/persistent/monsterTrackerDb.js'
 import * as trackerControlFactory from './ui/controls/trackerFactory.js';
 import * as trackerWizardFactory from './ui/controls/trackerWizardFactory.js';
+import * as trackerEventDialogFactory from './ui/controls/trackerEventDialogFactory.js'
 
 import {dbMonsterService} from './domain/persistent/monsterTrackerDb.js';
 
@@ -11,8 +12,10 @@ const trackerList = document.getElementById('trackerList');
 
 
 // Create Website Elements
-const wizard = trackerWizardFactory.createTrackerWizard();
-document.body.appendChild(wizard);
+const elTrackerWizardDialog = trackerWizardFactory.createTrackerWizard();
+document.body.appendChild(elTrackerWizardDialog);
+const elMonsterTrackerEventDialog = trackerEventDialogFactory.createTrackerEventDialog();
+document.body.appendChild(elMonsterTrackerEventDialog);
 
 
 
@@ -25,8 +28,12 @@ let showMonsterTrackerEntities = async () => {
     // let items  = storage.getAllKeyValuePairs(); 
     let monsters  = await monsterDB.getAllMonsterTrackerEntitiesSortByMonsterType(); 
     monsters.forEach(monsterTrackerEntityKeyValuePair => {
-        const trackerControl = trackerControlFactory.createMonsterTrackerControlFromMonsterEntity(monsterTrackerEntityKeyValuePair.value);
+        const trackerControl = trackerControlFactory.createMonsterTrackerControlFromMonsterEntity(elMonsterTrackerEventDialog,monsterTrackerEntityKeyValuePair.value);
+        // trackerControl.addEventListener('click',() => {
+        //     elMonsterTrackerEventDialog.showModal();
+        // });
         trackerList.appendChild(trackerControl);
+
     });
 }
 
@@ -40,11 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
     showMonsterTrackerEntities();
 });
 
-dbMonsterService.addEventListener('monsterSaved', (monsterSavedEvent) => {
-    // console.log('Eintrag gespeichert:', monsterData);
-    // const trackerControl = trackerControlFactory.createMonsterTrackerControlFromMonsterData(monsterData);
-    // trackerList.appendChild(trackerControl);
-});
 
 dbMonsterService.addEventListener('monsterDbUpdated', (monsterDbUpdatedEvent) => {
     console.log('MonsterDB aktualisiert:', monsterDbUpdatedEvent);
@@ -57,7 +59,7 @@ dbMonsterService.addEventListener('monsterDbUpdated', (monsterDbUpdatedEvent) =>
 
 
 showMonsterTrackerWizardBtn.addEventListener('click', () => {
-   wizard.showModal(); // Show the dialog
+   elTrackerWizardDialog.showModal(); // Show the dialog
 });
 
 

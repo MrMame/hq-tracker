@@ -23,7 +23,9 @@ export class MonsterDbService extends EventTarget{
         return sorteditems;
     }
 
-
+    async getMonsterTrackerEntity(key){
+        return storage.getKeyValuePair(key);
+    }
 
     async addMonsterTrackerEntity(monsterTrackerEntity) {
         let key = storage.save(monsterTrackerEntity);
