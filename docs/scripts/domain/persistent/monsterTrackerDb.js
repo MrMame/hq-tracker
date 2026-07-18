@@ -70,6 +70,10 @@ export class MonsterDbService extends EventTarget{
             Object.assign(existingEntity, updatedData);
             // Save the updated entity back to localStorage
             storage.save(existingEntity);
+            const monsterDbUpdatedEvent = new CustomEvent('monsterDbUpdated', {
+                detail: storage.getAllKeyValuePairs()
+            });
+            this.dispatchEvent(monsterDbUpdatedEvent);
         }
 }
 }

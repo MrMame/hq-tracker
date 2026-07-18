@@ -32,12 +32,9 @@ export function createMonsterTrackerControl(elMonsterTrackerEventDialog) {
     
 
     element.addEventListener('click',(el) => {
-        dbMonsterService.getMonsterTrackerEntity(element.dataset.key).then(ent => {
-            elMonsterTrackerEventDialog.dataset.key = element.dataset.key;
-            elMonsterTrackerEventDialog.querySelector('#tracker-event-dialog-health-input').value = ent.health;
-            elMonsterTrackerEventDialog.querySelector('#tracker-event-dialog-armor-input').value = ent.armor;
-            elMonsterTrackerEventDialog.querySelector('#tracker-event-dialog-focuspoints-input').value = ent.focus;
-            elMonsterTrackerEventDialog.showModal();
+        dbMonsterService.getMonsterTrackerEntity(element.dataset.key).then(monsterTrackerEntity => {
+            elMonsterTrackerEventDialog.loadMonster(monsterTrackerEntity);
+            elMonsterTrackerEventDialog.showDialog();
         })
     });
 

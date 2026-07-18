@@ -2,7 +2,7 @@
 import {MonsterDbService} from './domain/persistent/monsterTrackerDb.js'
 import * as trackerControlFactory from './ui/controls/trackerFactory.js';
 import * as trackerWizardFactory from './ui/controls/trackerWizardFactory.js';
-import * as trackerEventDialogFactory from './ui/controls/trackerEventDialogFactory.js'
+import {MonsterTrackerEventDialog} from './ui/controls/MonsterTrackerEventDialog.js'
 
 import {dbMonsterService} from './domain/persistent/monsterTrackerDb.js';
 
@@ -14,8 +14,8 @@ const trackerList = document.getElementById('trackerList');
 // Create Website Elements
 const elTrackerWizardDialog = trackerWizardFactory.createTrackerWizard();
 document.body.appendChild(elTrackerWizardDialog);
-const elMonsterTrackerEventDialog = trackerEventDialogFactory.createTrackerEventDialog();
-document.body.appendChild(elMonsterTrackerEventDialog);
+const monsterTrackerEventDialog = new MonsterTrackerEventDialog();
+document.body.appendChild(monsterTrackerEventDialog.getHtmlElement());
 
 
 
@@ -28,7 +28,7 @@ let showMonsterTrackerEntities = async () => {
     // let items  = storage.getAllKeyValuePairs(); 
     let monsters  = await monsterDB.getAllMonsterTrackerEntitiesSortByMonsterType(); 
     monsters.forEach(monsterTrackerEntityKeyValuePair => {
-        const trackerControl = trackerControlFactory.createMonsterTrackerControlFromMonsterEntity(elMonsterTrackerEventDialog,monsterTrackerEntityKeyValuePair.value);
+        const trackerControl = trackerControlFactory.createMonsterTrackerControlFromMonsterEntity(monsterTrackerEventDialog,monsterTrackerEntityKeyValuePair.value);
         // trackerControl.addEventListener('click',() => {
         //     elMonsterTrackerEventDialog.showModal();
         // });
