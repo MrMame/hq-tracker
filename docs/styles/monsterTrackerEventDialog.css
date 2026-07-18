@@ -1,0 +1,32 @@
+#trackerEvent {
+    width:80%;
+    height:80%
+}
+
+
+#trackerEvent .button-container{
+    margin-bottom:10%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+#trackerEvent #buttonContainerNormalHitTaken button{
+    background-color: yellow;
+    width: 3em;
+    height:3em;
+}
+#trackerEvent #buttonContainerCriticalHitTaken button{
+    background-color: red;
+    color: white;
+    width: 3em;
+    height:3em;
+}
+#trackerEvent #buttonContainerFocusPointsUsed button{
+    background-color: blue;
+    color: white;
+    width: 3em;
+    height:3em;
+}
+
+#trackerEvent .stats-input-container{
+    margin:30px;
+}

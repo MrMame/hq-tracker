@@ -99,15 +99,7 @@ export class MonsterTrackerEventDialog{
         // Dialog Refresh -----------------------------------------------------------
         // Refresh the dialog each time it is clicked to ensure the selected image and color are reset
         elDialog.addEventListener('click', (el) => {
-            console.log('Tracker Event Dialog clicked');
-            // Get Selected Color from Colorselection 
-            let selectedColor = elDialog.querySelector('.color-option.selected')?.style.backgroundColor;
-            // Set Background of the selected image to the selected color
-            elDialog.querySelectorAll('.monster-icon').forEach(i => i.style.backgroundColor =  "transparent"); // Reset all images to transparent
-            elDialog.querySelectorAll('.template-button').forEach(i => i.style.backgroundColor =  "lightgrey"); // Reset all images to transparent
-            elDialog.querySelector('.monster-icon.selected').style.backgroundColor = selectedColor;
-            elDialog.querySelector('.template-button.selected').style.backgroundColor = selectedColor;
-            
+            el.stopPropagation();
         });
         // Buttons -----------------------------------------------------------
         elDialog.querySelectorAll('.normal-hit-damage-btn').forEach(el=>{
@@ -141,6 +133,25 @@ export class MonsterTrackerEventDialog{
                 dbMonsterService.updateMonsterTrackerEntity(this._monsterTrackerEntity.key,this._monsterTrackerEntity);
                 this._elHtml.close();
             });
+        });
+
+        elDialog.querySelector('#tracker-event-dialog-health-input').addEventListener('change',(el) => {
+            let newVal = el.target.value;
+            if(newVal<0){newVal=0;}
+            this._monsterTrackerEntity.health = newVal;
+            dbMonsterService.updateMonsterTrackerEntity(this._monsterTrackerEntity.key,this._monsterTrackerEntity);
+        });
+         elDialog.querySelector('#tracker-event-dialog-armor-input').addEventListener('change',(el) => {
+            let newVal = el.target.value;
+            if(newVal<0){newVal=0;}
+            this._monsterTrackerEntity.armor = newVal;
+            dbMonsterService.updateMonsterTrackerEntity(this._monsterTrackerEntity.key,this._monsterTrackerEntity);
+        });
+         elDialog.querySelector('#tracker-event-dialog-focuspoints-input').addEventListener('change',(el) => {
+            let newVal = el.target.value;
+            if(newVal<0){newVal=0;}
+            this._monsterTrackerEntity.focus = newVal;
+            dbMonsterService.updateMonsterTrackerEntity(this._monsterTrackerEntity.key,this._monsterTrackerEntity);
         });
 
         return elDialog;

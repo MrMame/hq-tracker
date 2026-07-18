@@ -12,16 +12,16 @@ export function createMonsterTrackerControl(elMonsterTrackerEventDialog) {
             <div class="input-container">
                 <input class="monster-name-input" type="text" placeholder="Monster Name">
                 <label>Health
-                    <input class="monster-health-input" type="number" placeholder="Health">
+                    <input disabled class="monster-health-input" type="number" placeholder="Health">
                 </label>
                 <label>Armor
-                    <input class="monster-armor-input" type="number" placeholder="Armor">
+                    <input disabled class="monster-armor-input" type="number" placeholder="Armor">
                 </label>
                 <label>Focus
-                    <input class="monster-focuspoints-input" type="number" placeholder="Focus">
+                    <input disabled class="monster-focuspoints-input" type="number" placeholder="Focus">
                 </label>
                 <label>Move
-                    <input class="monster-movingpoints-input" type="number" placeholder="Move">
+                    <input disabled class="monster-movingpoints-input" type="number" placeholder="Move">
                 </label>
             </div>
         </div>
