@@ -1,5 +1,7 @@
 import {dbMonsterService} from '../../domain/persistent/monsterTrackerDb.js';
 import {MonsterTrackerEntity} from '../../domain/models/monsterTrackerEntity.js';
+import { MonsterTypeChaosWarrior, MonsterTypeFimir, MonsterTypeGargoyle, MonsterTypeGoblin, MonsterTypeHexer, MonsterTypeMummy, MonsterTypeOrc, MonsterTypeSkeleton, MonsterTypeUnknown, MonsterTypeZombie } from '../../domain/models/monsterTypes.js';
+import { MonsterNameService } from '../../domain/services/MonsterNameService.js';
 
 
 export function createTrackerWizard() {
@@ -41,7 +43,7 @@ export function createTrackerWizard() {
             </div>
             <div id="statsInputContainer" class="stats-input-container">
                 <label>Name
-                    <input id="wizard-name-input" type="text" placeholder="Monster Name">
+                    <input id="wizard-name-input" type="text" placeholder="Monster Name" value="${MonsterNameService.getGoblinName()}">
                 </label>
                 <label>Health
                     <input id="wizard-health-input" type="number" placeholder="Health">
@@ -83,14 +85,14 @@ export function createTrackerWizard() {
     // Buttons -----------------------------------------------------------
     element.querySelector('#wizard-cancel-btn').addEventListener('click', () => element.close());
     element.querySelector('#wizard-create-btn').addEventListener('click', () => {
-        const name = element.querySelector('#wizard-name-input').value;
         const selectedImage = element.querySelector('.monster-icon.selected')?.getAttribute('data-image') || 'img/monster-icon-abscheulichkeit.png';
+        const monsterType = MonsterTrackerEntity.getMonsterTypeFromImagePath(selectedImage);
+        const name = element.querySelector('#wizard-name-input').value;
         const color = element.querySelector('.color-option.selected')?.style.backgroundColor
         const health = parseInt(element.querySelector('#wizard-health-input').value, 10);
         const armor = parseInt(element.querySelector('#wizard-armor-input').value, 10);
         const focus = parseInt(element.querySelector('#wizard-focuspoints-input').value, 10);
         const move = parseInt(element.querySelector('#wizard-movingpoints-input').value, 10);
-        const monsterType = MonsterTrackerEntity.getMonsterTypeFromImagePath(selectedImage);
         const newMonsterTrackerEntity = new MonsterTrackerEntity(null, selectedImage,color, name, health, armor, focus, move, monsterType);
         dbMonsterService.addMonsterTrackerEntity(newMonsterTrackerEntity);
         element.close();
@@ -99,6 +101,18 @@ export function createTrackerWizard() {
         icon.addEventListener('click', () => {
             element.querySelectorAll('.monster-icon').forEach(i => i.classList.remove('selected'));
             icon.classList.add('selected');
+            let selectedImage = element.querySelector('.monster-icon.selected')?.getAttribute('data-image') || 'img/monster-icon-abscheulichkeit.png';
+            const monsterType = MonsterTrackerEntity.getMonsterTypeFromImagePath(selectedImage);
+            if(monsterType.TYPENAME===MonsterTypeGoblin.TYPENAME){element.querySelector('#wizard-name-input').value = MonsterNameService.getGoblinName();}
+            if(monsterType.TYPENAME===MonsterTypeOrc.TYPENAME){element.querySelector('#wizard-name-input').value = MonsterNameService.getOrcName();}
+            if(monsterType.TYPENAME===MonsterTypeChaosWarrior.TYPENAME){element.querySelector('#wizard-name-input').value = MonsterNameService.getChaosWarriorName();}
+            if(monsterType.TYPENAME===MonsterTypeFimir.TYPENAME){element.querySelector('#wizard-name-input').value = MonsterNameService.getFimirName();}
+            if(monsterType.TYPENAME===MonsterTypeGargoyle.TYPENAME){element.querySelector('#wizard-name-input').value = MonsterNameService.getGargoyleName();}
+            if(monsterType.TYPENAME===MonsterTypeHexer.TYPENAME){element.querySelector('#wizard-name-input').value = MonsterNameService.getHexerName();}
+            if(monsterType.TYPENAME===MonsterTypeMummy.TYPENAME){element.querySelector('#wizard-name-input').value = MonsterNameService.getMummyName();}
+            if(monsterType.TYPENAME===MonsterTypeSkeleton.TYPENAME){element.querySelector('#wizard-name-input').value = MonsterNameService.getSkeletonName();}
+            if(monsterType.TYPENAME===MonsterTypeZombie.TYPENAME){element.querySelector('#wizard-name-input').value = MonsterNameService.getZombieName();}
+            if(monsterType.TYPENAME===MonsterTypeUnknown.TYPENAME){element.querySelector('#wizard-name-input').value = MonsterNameService.getUnknownName();}
         });
     });
     element.querySelectorAll('.color-option').forEach(colorOption => {
