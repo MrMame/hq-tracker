@@ -16,7 +16,6 @@ export class MonsterEntityService{
         let move;
         let monType;
         let monTemplateLevel;
-
         if(templateName==="easy"){
             key=null;
             image="img/monster-icon-Goblin.png";
@@ -62,19 +61,7 @@ export class MonsterEntityService{
             monType=MonsterTypes.MonsterTypeGoblin;
             monTemplateLevel = templateName;
         }
-        
-        let newGob = new MonsterTrackerEntity(
-            key,
-            image,
-            color,
-            name, 
-            health, 
-            armor, 
-            focus, 
-            move,
-            monType,
-            monTemplateLevel
-        );
+        let newGob = new MonsterTrackerEntity(key,image,color,name, health, armor, focus, move,monType,monTemplateLevel);
         return newGob;
     }
 

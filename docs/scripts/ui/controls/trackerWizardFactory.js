@@ -70,8 +70,8 @@ export function createTrackerWizard() {
     `;
 
     const element = document.createRange().createContextualFragment(htmlString).firstElementChild;
-    // const initMonster = MonsterEntityService.createGoblinEntity("easy");
-    const initMonster = MonsterEntityService.createGoblinEntity("normal");
+    const initMonster = MonsterEntityService.createGoblinEntity("easy");
+    // const initMonster = MonsterEntityService.createGoblinEntity("normal");
     // const initMonster = MonsterEntityService.createGoblinEntity("hard");
     // const initMonster = MonsterEntityService.createGoblinEntity("elite");
 
@@ -147,15 +147,19 @@ export function createTrackerWizard() {
 
 
 function loadMonsterEntityInWizard(element,monsterEntity){
-    // Select image
-    element.querySelectorAll('.monster-icon').forEach(c => c.classList.remove('selected'));
-    element.querySelector(`.monster-icon[src="${monsterEntity.image}"]`).classList.add('selected');
-    // Select Template-Button
-    element.querySelectorAll('.template-button').forEach(c => c.classList.remove('selected'));
-    element.querySelector(`.template-button.${monsterEntity.templateLevel}`).classList.add('selected');
     // Select Color
     element.querySelectorAll(`.color-option.selected`).forEach(c => { c.classList.remove('selected');});
     element.querySelector(`.color-option[data-color="${monsterEntity.color}"]`).classList.add('selected');
+    // Select image
+    element.querySelectorAll('.monster-icon').forEach(c => c.classList.remove('selected'));
+    let elImage = element.querySelector(`.monster-icon[src="${monsterEntity.image}"]`)
+    elImage.classList.add('selected');
+    elImage.style.backgroundColor = monsterEntity.color;
+    // Select and colorize Template-Button 
+    element.querySelectorAll('.template-button').forEach(c => c.classList.remove('selected'));
+    let elTmpBt = element.querySelector(`.template-button.${monsterEntity.templateLevel}`)
+    elTmpBt.classList.add('selected');
+    elTmpBt.style.backgroundColor = monsterEntity.color;
     // Set Monster Name
     element.querySelector(`#wizard-name-input`).value = monsterEntity.name;
     // Set Health
