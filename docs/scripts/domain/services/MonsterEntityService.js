@@ -2,11 +2,11 @@ import {MonsterTrackerEntity} from '../models/monsterTrackerEntity.js';
 import { MonsterNameService } from './MonsterNameService.js';
 import * as MonsterTypes from '../models/monsterTypes.js';
 import * as MonsterColors from '../models/monsterColors.js';
-
+import * as MonsterTemplateNames from '../../domain/models/monsterTemplateNames.js'
 
 export class MonsterEntityService{
 
-    static createGoblinEntity(templateName){
+    static createGoblinEntity(monsterTemplateName){
         let key;
         let image;
         let color;
@@ -17,7 +17,7 @@ export class MonsterEntityService{
         let move;
         let monType;
         let monTemplateLevel;
-        if(templateName==="easy"){
+        if(monsterTemplateName===MonsterTemplateNames.Easy){
             key=null;
             image="img/monster-icon-Goblin.png";
             color=MonsterColors.Green;
@@ -27,8 +27,8 @@ export class MonsterEntityService{
             focus=0;
             move=10;
             monType=MonsterTypes.MonsterTypeGoblin;
-            monTemplateLevel = templateName;
-        }else if(templateName==="normal"){
+            monTemplateLevel = monsterTemplateName;
+        }else if(monsterTemplateName===MonsterTemplateNames.Normal){
             key=null;
             image="img/monster-icon-Goblin.png";
             color=MonsterColors.White;
@@ -38,8 +38,8 @@ export class MonsterEntityService{
             focus=0;
             move=10;
             monType=MonsterTypes.MonsterTypeGoblin;
-            monTemplateLevel = templateName;
-        }else if(templateName==="hard"){
+            monTemplateLevel = monsterTemplateName;
+        }else if(monsterTemplateName===MonsterTemplateNames.Hard){
             key=null;
             image="img/monster-icon-Goblin.png";
             color=MonsterColors.Red;
@@ -49,8 +49,8 @@ export class MonsterEntityService{
             focus=0;
             move=12;
             monType=MonsterTypes.MonsterTypeGoblin;
-            monTemplateLevel = templateName;
-        }else if(templateName==="elite"){
+            monTemplateLevel = monsterTemplateName;
+        }else if(monsterTemplateName===MonsterTemplateNames.Elite){
             key=null;
             image="img/monster-icon-Goblin.png";
             color=MonsterColors.Pink;
@@ -60,7 +60,7 @@ export class MonsterEntityService{
             focus=5;
             move=15;
             monType=MonsterTypes.MonsterTypeGoblin;
-            monTemplateLevel = templateName;
+            monTemplateLevel = monsterTemplateName;
         }
         let newGob = new MonsterTrackerEntity(key,image,color,name, health, armor, focus, move,monType,monTemplateLevel);
         return newGob;

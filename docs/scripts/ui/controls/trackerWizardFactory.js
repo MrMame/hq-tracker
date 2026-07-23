@@ -4,6 +4,7 @@ import { MonsterTypeChaosWarrior, MonsterTypeFimir, MonsterTypeGargoyle, Monster
 import { MonsterNameService } from '../../domain/services/MonsterNameService.js';
 import { MonsterEntityService } from '../../domain/services/MonsterEntityService.js';
 import * as MonsterColors from '../../domain/models/monsterColors.js'
+import * as MonsterTemplateNames from '../../domain/models/monsterTemplateNames.js'
 
 
 export function createTrackerWizard() {
@@ -30,10 +31,10 @@ export function createTrackerWizard() {
                 </div>
             </div>
                 <div id="templatebuttonContainer" class="button-container">
-                    <button id="wizard-template-easy-btn" class="template-button easy">Easy</button>
-                    <button id="wizard-template-normal-btn" class="template-button normal">Normal</button>
-                    <button id="wizard-template-hard-btn" class="template-button hard">Hard</button>
-                    <button id="wizard-template-elite-btn" class="template-button elite">Elite</button>
+                    <button id="wizard-template-easy-btn" class="template-button ${MonsterTemplateNames.Easy.toLowerCase()}">${MonsterTemplateNames.Easy}</button>
+                    <button id="wizard-template-normal-btn" class="template-button ${MonsterTemplateNames.Normal.toLowerCase()}">${MonsterTemplateNames.Normal}</button>
+                    <button id="wizard-template-hard-btn" class="template-button ${MonsterTemplateNames.Hard.toLowerCase()}">${MonsterTemplateNames.Hard}</button>
+                    <button id="wizard-template-elite-btn" class="template-button ${MonsterTemplateNames.Elite.toLowerCase()}">${MonsterTemplateNames.Elite}</button>
                 </div>
             <div id="colorSelectContainer" class="color-select-container">
                 <div class="color-option" data-color=${MonsterColors.Red} style="background-color: ${MonsterColors.Red};"></div>
@@ -71,10 +72,10 @@ export function createTrackerWizard() {
     `;
 
     const elWizardDialog = document.createRange().createContextualFragment(htmlString).firstElementChild;
-    // const initMonster = MonsterEntityService.createGoblinEntity("easy");
-    const initMonster = MonsterEntityService.createGoblinEntity("normal");
-    // const initMonster = MonsterEntityService.createGoblinEntity("hard");
-    // const initMonster = MonsterEntityService.createGoblinEntity("elite");
+    // const initMonster = MonsterEntityService.createGoblinEntity(MonsterTemplateNames.Easy);
+    const initMonster = MonsterEntityService.createGoblinEntity(MonsterTemplateNames.Normal);
+    // const initMonster = MonsterEntityService.createGoblinEntity(MonsterTemplateNames.Hard);
+    // const initMonster = MonsterEntityService.createGoblinEntity(MonsterTemplateNames.Elite);
 
     // Init Monster Laden
     loadMonsterEntityInWizard(elWizardDialog,initMonster);
@@ -158,7 +159,7 @@ function loadMonsterEntityInWizard(element,monsterEntity){
     elImage.style.backgroundColor = monsterEntity.color;
     // Select and colorize Template-Button 
     element.querySelectorAll('.template-button').forEach(c => c.classList.remove('selected'));
-    let elTmpBt = element.querySelector(`.template-button.${monsterEntity.templateLevel}`)
+    let elTmpBt = element.querySelector(`.template-button.${monsterEntity.templateLevel.toLowerCase()}`)
     elTmpBt.classList.add('selected');
     elTmpBt.style.backgroundColor = monsterEntity.color;
     // Set Monster Name
