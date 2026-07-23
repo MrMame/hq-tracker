@@ -1,6 +1,7 @@
 import {MonsterTrackerEntity} from '../models/monsterTrackerEntity.js';
 import { MonsterNameService } from './MonsterNameService.js';
-import * as MonsterTypes from '../models/monsterTypes.js'
+import * as MonsterTypes from '../models/monsterTypes.js';
+import * as MonsterColors from '../models/monsterColors.js';
 
 
 export class MonsterEntityService{
@@ -19,7 +20,7 @@ export class MonsterEntityService{
         if(templateName==="easy"){
             key=null;
             image="img/monster-icon-Goblin.png";
-            color="#FF0000";
+            color=MonsterColors.Green;
             name=MonsterNameService.getGoblinName();
             health=1;
             armor=0;
@@ -30,7 +31,7 @@ export class MonsterEntityService{
         }else if(templateName==="normal"){
             key=null;
             image="img/monster-icon-Goblin.png";
-            color="#002900";
+            color=MonsterColors.White;
             name=MonsterNameService.getGoblinName();
             health=2;
             armor=5;
@@ -41,7 +42,7 @@ export class MonsterEntityService{
         }else if(templateName==="hard"){
             key=null;
             image="img/monster-icon-Goblin.png";
-            color="#002900";
+            color=MonsterColors.Red;
             name=MonsterNameService.getGoblinName();
             health=10;
             armor=7;
@@ -52,7 +53,7 @@ export class MonsterEntityService{
         }else if(templateName==="elite"){
             key=null;
             image="img/monster-icon-Goblin.png";
-            color="#ff83f5";
+            color=MonsterColors.Pink;
             name=MonsterNameService.getGoblinName();
             health=20;
             armor=10;

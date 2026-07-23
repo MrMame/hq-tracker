@@ -69,80 +69,80 @@ export function createTrackerWizard() {
         </dialog>
     `;
 
-    const element = document.createRange().createContextualFragment(htmlString).firstElementChild;
-    const initMonster = MonsterEntityService.createGoblinEntity("easy");
-    // const initMonster = MonsterEntityService.createGoblinEntity("normal");
+    const elWizardDialog = document.createRange().createContextualFragment(htmlString).firstElementChild;
+    // const initMonster = MonsterEntityService.createGoblinEntity("easy");
+    const initMonster = MonsterEntityService.createGoblinEntity("normal");
     // const initMonster = MonsterEntityService.createGoblinEntity("hard");
     // const initMonster = MonsterEntityService.createGoblinEntity("elite");
 
     // Init Monster Laden
-    loadMonsterEntityInWizard(element,initMonster);
+    loadMonsterEntityInWizard(elWizardDialog,initMonster);
 
 
 
-    element.style.backgroundColor = "lightgray";
+    elWizardDialog.style.backgroundColor = "lightgray";
     // Dialog Refresh -----------------------------------------------------------
     // Refresh the dialog each time it is clicked to ensure the selected image and color are reset
-    element.addEventListener('click', () => {
+    elWizardDialog.addEventListener('click', () => {
         console.log('Tracker Wizard clicked');
         // Get Selected Color from Colorselection 
-        let selectedColor = element.querySelector('.color-option.selected')?.style.backgroundColor;
+        let selectedColor = elWizardDialog.querySelector('.color-option.selected')?.style.backgroundColor;
         // Set Background of the selected image to the selected color
-        element.querySelectorAll('.monster-icon').forEach(i => i.style.backgroundColor =  "transparent"); // Reset all images to transparent
-        element.querySelectorAll('.template-button').forEach(i => i.style.backgroundColor =  "lightgrey"); // Reset all images to transparent
-        element.querySelector('.monster-icon.selected').style.backgroundColor = selectedColor;
-        element.querySelector('.template-button.selected').style.backgroundColor = selectedColor;
+        elWizardDialog.querySelectorAll('.monster-icon').forEach(i => i.style.backgroundColor =  "transparent"); // Reset all images to transparent
+        elWizardDialog.querySelectorAll('.template-button').forEach(i => i.style.backgroundColor =  "lightgrey"); // Reset all images to transparent
+        elWizardDialog.querySelector('.monster-icon.selected').style.backgroundColor = selectedColor;
+        elWizardDialog.querySelector('.template-button.selected').style.backgroundColor = selectedColor;
         
     });
     // Buttons -----------------------------------------------------------
-    element.querySelector('#wizard-cancel-btn').addEventListener('click', () => element.close());
-    element.querySelector('#wizard-create-btn').addEventListener('click', () => {
-        const selectedImage = element.querySelector('.monster-icon.selected')?.getAttribute('data-image') || 'img/monster-icon-abscheulichkeit.png';
+    elWizardDialog.querySelector('#wizard-cancel-btn').addEventListener('click', () => elWizardDialog.close());
+    elWizardDialog.querySelector('#wizard-create-btn').addEventListener('click', () => {
+        const selectedImage = elWizardDialog.querySelector('.monster-icon.selected')?.getAttribute('data-image') || 'img/monster-icon-abscheulichkeit.png';
         const monsterType = MonsterTrackerEntity.getMonsterTypeFromImagePath(selectedImage);
-        const name = element.querySelector('#wizard-name-input').value;
-        const color = element.querySelector('.color-option.selected')?.style.backgroundColor
-        const health = parseInt(element.querySelector('#wizard-health-input').value, 10);
-        const armor = parseInt(element.querySelector('#wizard-armor-input').value, 10);
-        const focus = parseInt(element.querySelector('#wizard-focuspoints-input').value, 10);
-        const move = parseInt(element.querySelector('#wizard-movingpoints-input').value, 10);
+        const name = elWizardDialog.querySelector('#wizard-name-input').value;
+        const color = elWizardDialog.querySelector('.color-option.selected')?.style.backgroundColor
+        const health = parseInt(elWizardDialog.querySelector('#wizard-health-input').value, 10);
+        const armor = parseInt(elWizardDialog.querySelector('#wizard-armor-input').value, 10);
+        const focus = parseInt(elWizardDialog.querySelector('#wizard-focuspoints-input').value, 10);
+        const move = parseInt(elWizardDialog.querySelector('#wizard-movingpoints-input').value, 10);
         const newMonsterTrackerEntity = new MonsterTrackerEntity(null, selectedImage,color, name, health, armor, focus, move, monsterType);
         dbMonsterService.addMonsterTrackerEntity(newMonsterTrackerEntity);
-        element.close();
+        elWizardDialog.close();
     });
-    element.querySelectorAll('.monster-icon').forEach(icon => {
+    elWizardDialog.querySelectorAll('.monster-icon').forEach(icon => {
         icon.addEventListener('click', () => {
-            element.querySelectorAll('.monster-icon').forEach(i => i.classList.remove('selected'));
+            elWizardDialog.querySelectorAll('.monster-icon').forEach(i => i.classList.remove('selected'));
             icon.classList.add('selected');
-            let selectedImage = element.querySelector('.monster-icon.selected')?.getAttribute('data-image') || 'img/monster-icon-abscheulichkeit.png';
+            let selectedImage = elWizardDialog.querySelector('.monster-icon.selected')?.getAttribute('data-image') || 'img/monster-icon-abscheulichkeit.png';
             const monsterType = MonsterTrackerEntity.getMonsterTypeFromImagePath(selectedImage);
-            if(monsterType.TYPENAME===MonsterTypeGoblin.TYPENAME){element.querySelector('#wizard-name-input').value = MonsterNameService.getGoblinName();}
-            if(monsterType.TYPENAME===MonsterTypeOrc.TYPENAME){element.querySelector('#wizard-name-input').value = MonsterNameService.getOrcName();}
-            if(monsterType.TYPENAME===MonsterTypeChaosWarrior.TYPENAME){element.querySelector('#wizard-name-input').value = MonsterNameService.getChaosWarriorName();}
-            if(monsterType.TYPENAME===MonsterTypeFimir.TYPENAME){element.querySelector('#wizard-name-input').value = MonsterNameService.getFimirName();}
-            if(monsterType.TYPENAME===MonsterTypeGargoyle.TYPENAME){element.querySelector('#wizard-name-input').value = MonsterNameService.getGargoyleName();}
-            if(monsterType.TYPENAME===MonsterTypeHexer.TYPENAME){element.querySelector('#wizard-name-input').value = MonsterNameService.getHexerName();}
-            if(monsterType.TYPENAME===MonsterTypeMummy.TYPENAME){element.querySelector('#wizard-name-input').value = MonsterNameService.getMummyName();}
-            if(monsterType.TYPENAME===MonsterTypeSkeleton.TYPENAME){element.querySelector('#wizard-name-input').value = MonsterNameService.getSkeletonName();}
-            if(monsterType.TYPENAME===MonsterTypeZombie.TYPENAME){element.querySelector('#wizard-name-input').value = MonsterNameService.getZombieName();}
-            if(monsterType.TYPENAME===MonsterTypeUnknown.TYPENAME){element.querySelector('#wizard-name-input').value = MonsterNameService.getUnknownName();}
+            if(monsterType.TYPENAME===MonsterTypeGoblin.TYPENAME){elWizardDialog.querySelector('#wizard-name-input').value = MonsterNameService.getGoblinName();}
+            if(monsterType.TYPENAME===MonsterTypeOrc.TYPENAME){elWizardDialog.querySelector('#wizard-name-input').value = MonsterNameService.getOrcName();}
+            if(monsterType.TYPENAME===MonsterTypeChaosWarrior.TYPENAME){elWizardDialog.querySelector('#wizard-name-input').value = MonsterNameService.getChaosWarriorName();}
+            if(monsterType.TYPENAME===MonsterTypeFimir.TYPENAME){elWizardDialog.querySelector('#wizard-name-input').value = MonsterNameService.getFimirName();}
+            if(monsterType.TYPENAME===MonsterTypeGargoyle.TYPENAME){elWizardDialog.querySelector('#wizard-name-input').value = MonsterNameService.getGargoyleName();}
+            if(monsterType.TYPENAME===MonsterTypeHexer.TYPENAME){elWizardDialog.querySelector('#wizard-name-input').value = MonsterNameService.getHexerName();}
+            if(monsterType.TYPENAME===MonsterTypeMummy.TYPENAME){elWizardDialog.querySelector('#wizard-name-input').value = MonsterNameService.getMummyName();}
+            if(monsterType.TYPENAME===MonsterTypeSkeleton.TYPENAME){elWizardDialog.querySelector('#wizard-name-input').value = MonsterNameService.getSkeletonName();}
+            if(monsterType.TYPENAME===MonsterTypeZombie.TYPENAME){elWizardDialog.querySelector('#wizard-name-input').value = MonsterNameService.getZombieName();}
+            if(monsterType.TYPENAME===MonsterTypeUnknown.TYPENAME){elWizardDialog.querySelector('#wizard-name-input').value = MonsterNameService.getUnknownName();}
         });
     });
-    element.querySelectorAll('.color-option').forEach(colorOption => {
+    elWizardDialog.querySelectorAll('.color-option').forEach(colorOption => {
         colorOption.addEventListener('click', () => {
-            element.querySelectorAll('.color-option').forEach(c => c.classList.remove('selected'));
+            elWizardDialog.querySelectorAll('.color-option').forEach(c => c.classList.remove('selected'));
             colorOption.classList.add('selected');
             const selectedColor = colorOption.getAttribute('data-color');
         });
     });
-    element.querySelectorAll('.template-button').forEach(tmpB => {
+    elWizardDialog.querySelectorAll('.template-button').forEach(tmpB => {
         tmpB.addEventListener('click',()=>{
-            element.querySelectorAll('.template-button').forEach(tmpB => {tmpB.classList.remove('selected')});
+            elWizardDialog.querySelectorAll('.template-button').forEach(tmpB => {tmpB.classList.remove('selected')});
             tmpB.classList.add('selected');
         })
     });
 
 
-    return element;
+    return elWizardDialog;
 }
 
 
