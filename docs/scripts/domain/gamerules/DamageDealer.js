@@ -16,7 +16,10 @@ export class DamageDealer{
         }
         // Set new Values
         monsterTrackerEntity.armor = newArmorValue;
-        monsterTrackerEntity.health = monsterTrackerEntity.health - healthDamage;
+        let newHealthValue = monsterTrackerEntity.health - healthDamage;
+        if(newHealthValue<0){newHealthValue=0;}
+        monsterTrackerEntity.health = newHealthValue;
+
         return monsterTrackerEntity;
     }   
 
