@@ -3,6 +3,7 @@ import {MonsterTrackerEntity} from '../../domain/models/monsterTrackerEntity.js'
 import { MonsterTypeChaosWarrior, MonsterTypeFimir, MonsterTypeGargoyle, MonsterTypeGoblin, MonsterTypeHexer, MonsterTypeMummy, MonsterTypeOrc, MonsterTypeSkeleton, MonsterTypeUnknown, MonsterTypeZombie } from '../../domain/models/monsterTypes.js';
 import { MonsterNameService } from '../../domain/services/MonsterNameService.js';
 import { MonsterEntityService } from '../../domain/services/MonsterEntityService.js';
+import * as MonsterColors from '../../domain/models/monsterColors.js'
 
 
 export function createTrackerWizard() {
@@ -35,14 +36,14 @@ export function createTrackerWizard() {
                     <button id="wizard-template-elite-btn" class="template-button elite">Elite</button>
                 </div>
             <div id="colorSelectContainer" class="color-select-container">
-                <div class="color-option" data-color="#FF0000" style="background-color: #FF0000;"></div>
-                <div class="color-option" data-color="#0084ff" style="background-color: #0084ff;"></div>
-                <div class="color-option" data-color="#002900" style="background-color: #002900;"></div>
-                <div class="color-option" data-color="#ff83f5" style="background-color: #ff83f5;"></div>
-                <div class="color-option" data-color="#ffffff" style="background-color: #ffffff;"></div>
-                <div class="color-option" data-color="#ffbf6c" style="background-color: #ffbf6c;"></div>
-                <div class="color-option" data-color="#b48400" style="background-color: #b48400;"></div>
-                <div class="color-option" data-color="#720042" style="background-color: #720042;"></div>
+                <div class="color-option" data-color=${MonsterColors.Red} style="background-color: ${MonsterColors.Red};"></div>
+                <div class="color-option" data-color=${MonsterColors.Blue} style="background-color: ${MonsterColors.Blue};"></div>
+                <div class="color-option" data-color=${MonsterColors.Green} style="background-color: ${MonsterColors.Green};"></div>
+                <div class="color-option" data-color=${MonsterColors.Pink} style="background-color: ${MonsterColors.Pink};"></div>
+                <div class="color-option" data-color=${MonsterColors.White} style="background-color: ${MonsterColors.White};"></div>
+                <div class="color-option" data-color=${MonsterColors.Yellow} style="background-color: ${MonsterColors.Yellow};"></div>
+                <div class="color-option" data-color=${MonsterColors.Gold} style="background-color: ${MonsterColors.Gold};"></div>
+                <div class="color-option" data-color=${MonsterColors.Purple} style="background-color: ${MonsterColors.Purple};"></div>
                 
             </div>
             <div id="statsInputContainer" class="stats-input-container">
