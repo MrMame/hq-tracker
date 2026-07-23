@@ -8,22 +8,7 @@ import * as ZombNames from './../models/monsterNamesZombie.js'
 import * as FimNames from './../models/monsterNamesFimir.js'
 
 export class MonsterNameService{
-    static getGoblinName() {
-        // const firstNames = GobNameObj.names.goblin_names.first_names;
-        // const lastNames = GobNameObj.names.goblin_names.last_names;
-
-        // // Erzeuge einen zufälligen Index basierend auf der Array-Länge
-        // const randomFirst = firstNames[Math.floor(Math.random() * firstNames.length)];
-        // const randomLast = lastNames[Math.floor(Math.random() * lastNames.length)];
-
-        // // Kombiniere die Namen mit einem Leerzeichen dazwischen
-        return this.getRandomName(GobNames);
-    }
-
-
-
-
-
+    static getGoblinName()          {return this.getRandomName(GobNames);}
     static getOrcName()             {return this.getRandomName(OrcNames);}
     static getChaosWarriorName()    {}
     static getFimirName()           {return this.getRandomName(FimNames);}

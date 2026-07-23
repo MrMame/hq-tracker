@@ -2,14 +2,18 @@ import {dbMonsterService} from '../../domain/persistent/monsterTrackerDb.js';
 import {MonsterTrackerEntity} from '../../domain/models/monsterTrackerEntity.js';
 import { MonsterTypeChaosWarrior, MonsterTypeFimir, MonsterTypeGargoyle, MonsterTypeGoblin, MonsterTypeHexer, MonsterTypeMummy, MonsterTypeOrc, MonsterTypeSkeleton, MonsterTypeUnknown, MonsterTypeZombie } from '../../domain/models/monsterTypes.js';
 import { MonsterNameService } from '../../domain/services/MonsterNameService.js';
+import { MonsterEntityService } from '../../domain/services/MonsterEntityService.js';
 
 
 export function createTrackerWizard() {
+   
+
+
     const htmlString = `
         <dialog id="trackerWizard" class="tracker-wizard" closedby="any">
             <div id="imageSelectContainer" class="image-select-container">
                 <div class="imageSelectorRow">
-                    <img class="monster-icon selected" src="img/monster-icon-Goblin.png" data-image="img/monster-icon-Goblin.png">
+                    <img class="monster-icon " src="img/monster-icon-Goblin.png" data-image="img/monster-icon-Goblin.png">
                     <img class="monster-icon" src="img/monster-icon-Orc.png" data-image="img/monster-icon-Orc.png">
                     <img class="monster-icon" src="img/monster-icon-ChaosWarrior.png" data-image="img/monster-icon-ChaosWarrior.png">
                 </div>
@@ -25,13 +29,13 @@ export function createTrackerWizard() {
                 </div>
             </div>
                 <div id="templatebuttonContainer" class="button-container">
-                    <button id="wizard-template-easy-btn" class="template-button">Easy</button>
-                    <button id="wizard-template-normal-btn" class="template-button selected">Normal</button>
-                    <button id="wizard-template-hard-btn" class="template-button">Hard</button>
-                    <button id="wizard-template-elite-btn" class="template-button">Elite</button>
+                    <button id="wizard-template-easy-btn" class="template-button easy">Easy</button>
+                    <button id="wizard-template-normal-btn" class="template-button normal">Normal</button>
+                    <button id="wizard-template-hard-btn" class="template-button hard">Hard</button>
+                    <button id="wizard-template-elite-btn" class="template-button elite">Elite</button>
                 </div>
             <div id="colorSelectContainer" class="color-select-container">
-                <div class="color-option selected" data-color="#FF0000" style="background-color: #FF0000;"></div>
+                <div class="color-option" data-color="#FF0000" style="background-color: #FF0000;"></div>
                 <div class="color-option" data-color="#0084ff" style="background-color: #0084ff;"></div>
                 <div class="color-option" data-color="#002900" style="background-color: #002900;"></div>
                 <div class="color-option" data-color="#ff83f5" style="background-color: #ff83f5;"></div>
@@ -43,7 +47,7 @@ export function createTrackerWizard() {
             </div>
             <div id="statsInputContainer" class="stats-input-container">
                 <label>Name
-                    <input id="wizard-name-input" type="text" placeholder="Monster Name" value="${MonsterNameService.getGoblinName()}">
+                    <input id="wizard-name-input" type="text" placeholder="Monster Name">
                 </label>
                 <label>Health
                     <input id="wizard-health-input" type="number" placeholder="Health">
@@ -66,6 +70,14 @@ export function createTrackerWizard() {
     `;
 
     const element = document.createRange().createContextualFragment(htmlString).firstElementChild;
+    // const initMonster = MonsterEntityService.createGoblinEntity("easy");
+    const initMonster = MonsterEntityService.createGoblinEntity("normal");
+    // const initMonster = MonsterEntityService.createGoblinEntity("hard");
+    // const initMonster = MonsterEntityService.createGoblinEntity("elite");
+
+    // Init Monster Laden
+    loadMonsterEntityInWizard(element,initMonster);
+
 
 
     element.style.backgroundColor = "lightgray";
@@ -131,4 +143,27 @@ export function createTrackerWizard() {
 
 
     return element;
+}
+
+
+function loadMonsterEntityInWizard(element,monsterEntity){
+    // Select image
+    element.querySelectorAll('.monster-icon').forEach(c => c.classList.remove('selected'));
+    element.querySelector(`.monster-icon[src="${monsterEntity.image}"]`).classList.add('selected');
+    // Select Template-Button
+    element.querySelectorAll('.template-button').forEach(c => c.classList.remove('selected'));
+    element.querySelector(`.template-button.${monsterEntity.templateLevel}`).classList.add('selected');
+    // Select Color
+    element.querySelectorAll(`.color-option.selected`).forEach(c => { c.classList.remove('selected');});
+    element.querySelector(`.color-option[data-color="${monsterEntity.color}"]`).classList.add('selected');
+    // Set Monster Name
+    element.querySelector(`#wizard-name-input`).value = monsterEntity.name;
+    // Set Health
+    element.querySelector(`#wizard-health-input`).value = monsterEntity.health;
+    // Set Armor
+    element.querySelector(`#wizard-armor-input`).value = monsterEntity.armor;
+    // Set Focuspoints
+    element.querySelector(`#wizard-focuspoints-input`).value = monsterEntity.focus;
+    // Set MovingPoints
+    element.querySelector(`#wizard-movingpoints-input`).value = monsterEntity.move;
 }
