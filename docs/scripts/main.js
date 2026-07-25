@@ -12,8 +12,9 @@ const trackerList = document.getElementById('trackerList');
 
 
 // Create Website Elements
-const elTrackerWizardDialog = trackerWizardFactory.createTrackerWizard();
-document.body.appendChild(elTrackerWizardDialog);
+const trackerWizard = trackerWizardFactory.createTrackerWizard();
+//const elTrackerWizardDialog = trackerWizardFactory.createTrackerWizard();
+document.body.appendChild(trackerWizard.getHtmlElement());
 const monsterTrackerEventDialog = new MonsterTrackerEventDialog();
 document.body.appendChild(monsterTrackerEventDialog.getHtmlElement());
 
@@ -59,7 +60,8 @@ dbMonsterService.addEventListener('monsterDbUpdated', (monsterDbUpdatedEvent) =>
 
 
 showMonsterTrackerWizardBtn.addEventListener('click', () => {
-   elTrackerWizardDialog.showModal(); // Show the dialog
+    trackerWizard.showDialog();
+//    elTrackerWizardDialog.showModal(); // Show the dialog
 });
 
 
