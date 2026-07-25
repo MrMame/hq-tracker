@@ -39,7 +39,7 @@
 }
 #imageSelectContainer img.selected{
   #border: 10px solid black;
-  background-color: rgba(255, 0, 0, 1); /* Optional: Leichte Hintergrundfarbe */
+  background-color: rgb(85, 85, 85); /* Optional: Leichte Hintergrundfarbe */
 }
 
 
@@ -86,7 +86,7 @@
   background-color: lightgrey;
 }
 #templatebuttonContainer button.selected{
-  background-color: red;
+  background-color:  rgb(85, 85, 85);;
 }
 
 #buttonContainer{

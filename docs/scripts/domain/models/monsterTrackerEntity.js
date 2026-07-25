@@ -2,7 +2,7 @@ import * as monsterTypes from '../../domain/models/monsterTypes.js'
 
 export class MonsterTrackerEntity {
 
-    constructor(key,image,color,name, health, armor, focus, move,  monsterType,templateLevel) {
+    constructor({key,image,color,name, health, armor, focus, move,  monsterType,templateLevel}) {
         this.key = key;
         this.image = image;
         this.color = color;
